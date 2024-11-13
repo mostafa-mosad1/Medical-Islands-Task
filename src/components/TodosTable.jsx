@@ -19,18 +19,17 @@ export default function TodosTable({ AllTodos, socket }) {
     const { dummyTodos } = useSelector((state) => state.todos);
     const dispatch = useDispatch();
 
-
     const deleteHandler = (id) => {
         // eslint-disable-next-line react/prop-types
         socket.emit("deleteTodo", id);
     };
+
     useEffect(() => {
         dispatch(getTodos());
     }, [dispatch]);
-    console.log(AllTodos)
-    console.log(dummyTodos)
+
     return (
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} sx={{ overflowX: 'auto' }}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
@@ -42,7 +41,6 @@ export default function TodosTable({ AllTodos, socket }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-
                     {AllTodos.map((todo) => (
                         <TableRow
                             key={todo.id}
@@ -55,15 +53,15 @@ export default function TodosTable({ AllTodos, socket }) {
                             <TableCell align="center">{todo.completed ? "Completed" : "UnCompleted"}</TableCell>
                             <TableCell align="center">{todo.dueDate}</TableCell>
                             <TableCell align="right"> 
-                            <UpdateSingleTodo complete={todo.completed} date={todo.dueDate} myId ={todo.id} title={todo.todo} socket={socket} dummy={"no"} />
-
+                                <UpdateSingleTodo complete={todo.completed} date={todo.dueDate} myId ={todo.id} title={todo.todo} socket={socket} dummy={"no"} />
                                 <IconButton
                                     onClick={() => deleteHandler(todo.id)}
                                     sx={{ color: 'red' }}
                                     aria-label="delete"
                                 >
                                     <DeleteIcon />
-                                </IconButton></TableCell>
+                                </IconButton>
+                            </TableCell>
                         </TableRow>
                     ))}
 
@@ -79,8 +77,7 @@ export default function TodosTable({ AllTodos, socket }) {
                             <TableCell align="center">{todo.completed ? "Completed" : "UnCompleted"}</TableCell>
                             <TableCell align="center">{"11/11/2024"}</TableCell>
                             <TableCell align="right">
-                              
-                                <UpdateSingleTodo complete={todo.completed} date={"11/11/2024"} myId ={todo.id} title={todo.todo} socket={socket} dummy={"dummy"} />
+                                <UpdateSingleTodo complete={todo.completed} date={"11/11/2024"} myId ={todo.id} title={todo.todo} socket={socket} dummy={"yes"} />
                                 <IconButton
                                     onClick={() => {
                                         dispatch(deleteTodo(todo.id));
@@ -89,7 +86,8 @@ export default function TodosTable({ AllTodos, socket }) {
                                     aria-label="delete"
                                 >
                                     <DeleteIcon />
-                                </IconButton></TableCell>
+                                </IconButton>
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

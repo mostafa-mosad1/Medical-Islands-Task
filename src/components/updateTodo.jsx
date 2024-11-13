@@ -9,6 +9,7 @@ import { Checkbox, FormControlLabel, IconButton, TextField } from '@mui/material
 import {updateTodo} from './../redux/feature/TodosSlice/index';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDispatch } from 'react-redux';
+import  DialogTitle  from '@mui/material/DialogTitle';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -38,7 +39,7 @@ export default function UpdateSingleTodo({ complete, myId, title, socket, dummy,
     };
     const handleUpdate = (e) => {
         e.preventDefault()
-        if (dummy == "dummy") {
+        if (dummy == "yes") {
             dispach(updateTodo({ id: myId, completed: done, todo: todoTitle }));
             setOpen(false);
         }
@@ -73,6 +74,7 @@ export default function UpdateSingleTodo({ complete, myId, title, socket, dummy,
                 onClose={handleClose}
                 aria-describedby="alert-dialog-slide-description"
             >
+                        <DialogTitle sx={{mx:"auto" , fontWeight:"bold"}}>{"Update Your Todo"}</DialogTitle>
 
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">

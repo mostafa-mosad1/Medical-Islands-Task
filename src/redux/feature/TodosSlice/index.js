@@ -12,7 +12,6 @@ export const getTodos = createAsyncThunk(
     const { rejectWithValue } = thunkapi;
     try {
       const { status, data } = await axios.get("https://dummyjson.com/todos");
-      console.log(data);
       if (status === 200) {
         return data.todos;
       }

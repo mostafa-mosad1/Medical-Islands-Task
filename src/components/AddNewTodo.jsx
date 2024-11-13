@@ -6,6 +6,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import Slide from '@mui/material/Slide';
 import { useState } from 'react';
 import { Checkbox, FormControlLabel, TextField } from '@mui/material';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -70,7 +71,7 @@ export default function AddNewTodo({ socket }) {
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-
+        <DialogTitle sx={{mx:"auto" , fontWeight:"bold"}}>{"Add New Todo"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             <form onSubmit={OnSubmitHandler}>
